@@ -1,0 +1,108 @@
+<div class="card">
+  <div class="card-header">
+    {{pageTitle}}
+  </div>
+
+  <div class="card-body">
+    <form novalidate
+          (ngSubmit)="saveContact()"
+          [formGroup]="contactForm">
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label"
+               for="contactNameId">Contact Name</label>
+        <div class="col-md-8">
+          <input class="form-control"
+                 id="contactNameId"
+                 type="text"
+                 placeholder="Name (required)"
+                 formControlName="contactName"
+                 [ngClass]="{'is-invalid': displayMessage.contactName }" />
+          <span class="invalid-feedback">
+            {{displayMessage.contactName}}
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label"
+               for="contactAddress">Contact Address</label>
+        <div class="col-md-8">
+          <input class="form-control"
+                 id="contactAddress"
+                 type="text"
+                 placeholder="Address(required)"
+                 formControlName="contactAddress"
+                 [ngClass]="{'is-invalid': displayMessage.contactAddress }" />
+          <span class="invalid-feedback">
+            {{displayMessage.contactAddress}}
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label"
+               for="contactPhone">Contact Phone</label>
+
+        <div class="col-md-8">
+          <input class="form-control"
+                 id="contactPhone"
+                 type="tel"
+                 placeholder="Enter Phone Number"
+                 formControlName="contactPhone"
+                 [ngClass]="{'is-invalid': displayMessage.contactPhone}" />
+          <span class="invalid-feedback">
+            {{displayMessage.contactPhone}}
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label"
+               for="contactEmail">Contact Email</label>
+
+        <div class="col-md-8">
+          <input class="form-control"
+                 id="contactEmail"
+                 type="email"
+                 placeholder="Enter Email Address"
+                 formControlName="contactEmail"
+                 [ngClass]="{'is-invalid': displayMessage.contactEmail}" />
+          <span class="invalid-feedback">
+            {{displayMessage.contactEmail}}
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <div class="offset-md-2 col-md-4">
+          <button class="btn btn-primary mr-3"
+                  style="width:80px;"
+                  type="submit"
+                  [title]="contactForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+                  [disabled]="!contactForm.valid">
+            Save
+          </button>
+          <button class="btn btn-outline-secondary mr-3"
+                  style="width:80px;"
+                  type="button"
+                  title="Cancel your edits"
+                  [routerLink]="['/contacts']">
+            Cancel
+          </button>
+          <button class="btn btn-outline-warning"
+                  style="width:80px"
+                  type="button"
+                  title="Delete this contact"
+                  (click)="deleteContact()">
+            Delete
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="alert alert-danger"
+       *ngIf="errorMessage">{{errorMessage}}
+  </div>
+</div>
